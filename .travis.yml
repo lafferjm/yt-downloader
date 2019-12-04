@@ -7,5 +7,3 @@ deploy:
     provider: script
     script: "npm publish"
     skip_cleanup: true
-    on:
-        tags: true
