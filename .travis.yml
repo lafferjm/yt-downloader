@@ -5,5 +5,5 @@ os: linux
 
 deploy:
     provider: script
-    script: "npm publish"
+    script: "npm run publish"
     skip_cleanup: true
