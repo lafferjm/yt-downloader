@@ -24,10 +24,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "yt_downloader",
-            "platforms": [
-                "windows"
-            ]
+            "name": "yt_downloader"
           }
         },
         {

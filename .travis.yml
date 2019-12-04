@@ -1,5 +1,11 @@
 language: node_js
+node_js:
+    - "13.2.0"
+os: linux
 
-os:
-    - linux
-    - windows
+deploy:
+    provider: script
+    script: "npm publish"
+    skip_cleanup: true
+    on:
+        tags: true
