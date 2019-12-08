@@ -1,4 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
+const fs = require('fs');
+const path = require('path');
+const ytdl = require('ytdl-core');
 
 require('update-electron-app')();
 
@@ -60,5 +63,16 @@ app.on('activate', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
 ipcMain.on('form-submission', function(event, url) {
-  console.log("This is the url you entered: " + url);
+  const downloadDirectory = app.getPath('downloads');
+  const videoId = url.split("=")[1];
+  ytdl.getInfo(videoId, function (err, info) {
+    if (err) {
+      throw error;
+    }
+    const title = info.title + '.mp4';
+
+    ytdl.downloadFromInfo(info, {
+      filter: "audioonly"
+    }).pipe(fs.createWriteStream(path.join(downloadDirectory, title)));
+  });
 });
