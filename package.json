@@ -58,7 +58,8 @@
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
-    "update-electron-app": "^1.5.0"
+    "update-electron-app": "^1.5.0",
+    "ytdl-core": "^1.0.3"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.45",
