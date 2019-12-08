@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 const ytdl = require('ytdl-core');
 
@@ -88,7 +88,11 @@ ipcMain.on('form-submission', function(event, url) {
         // process.stdout.write(`${p.targetSize}kb downloaded`);
       })
       .on('end', () => {
-        // console.log('Done');
+        dialog.showMessageBox({
+          type: "info",
+          title: "Download Complete",
+          message: `Your song has been downloaded to: ${path.join(downloadDirectory, title)}`
+        })
       })
   });
 });
