@@ -58,6 +58,9 @@
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
+    "ffmpeg-static": "^2.7.0",
+    "ffprobe-static": "^3.0.0",
+    "fluent-ffmpeg": "^2.1.2",
     "update-electron-app": "^1.5.0",
     "ytdl-core": "^1.0.3"
   },

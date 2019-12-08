@@ -1,7 +1,13 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
-const fs = require('fs');
 const path = require('path');
 const ytdl = require('ytdl-core');
+
+const ffmpegPath = require('ffmpeg-static').path;
+const ffprobePath = require('ffprobe-static').path;
+const ffmpeg = require('fluent-ffmpeg');
+
+ffmpeg.setFfmpegPath(ffmpegPath);
+ffmpeg.setFfprobePath(ffprobePath);
 
 require('update-electron-app')();
 
@@ -69,10 +75,20 @@ ipcMain.on('form-submission', function(event, url) {
     if (err) {
       throw error;
     }
-    const title = info.title + '.mp4';
+    const title = info.title + '.mp3';
 
-    ytdl.downloadFromInfo(info, {
+    const stream = ytdl.downloadFromInfo(info, {
       filter: "audioonly"
-    }).pipe(fs.createWriteStream(path.join(downloadDirectory, title)));
+    });
+    ffmpeg(stream)
+      .audioBitrate(128)
+      .save(path.join(downloadDirectory, title))
+      .on('progress', p => {
+        // readline.cursorTo(process.stdout, 0);
+        // process.stdout.write(`${p.targetSize}kb downloaded`);
+      })
+      .on('end', () => {
+        // console.log('Done');
+      })
   });
 });
