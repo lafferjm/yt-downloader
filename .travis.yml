@@ -9,3 +9,4 @@ deploy:
     provider: script
     script: "npm run publish"
     skip_cleanup: true
+    tag: next
