@@ -2,11 +2,16 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Youtube Downloader</title>
     <link rel="stylesheet" href="index.css">
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
+    <form name="downloadForm" action="JavaScript:sendForm(event)">
+      <label for="youtubeUrl">Youtube URL: </label>
+      <input type="text" name="youtubeUrl" id="youtubeUrl" />
+      <input id="submit" type="submit" value="Download" />
+    </form>
+
+    <script src='actions/download.js'></script>
   </body>
 </html>
