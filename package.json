@@ -42,17 +42,19 @@
         {
           "name": "@electron-forge/publisher-github",
           "config": {
-              "repository": {
-                  "owner": "lafferjm",
-                  "name": "yt-downloader"
-              }
+            "repository": {
+              "owner": "lafferjm",
+              "name": "yt-downloader"
+            },
+            "draft": false
           }
         }
       ]
     }
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "update-electron-app": "^1.5.0"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.45",
