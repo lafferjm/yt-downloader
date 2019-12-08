@@ -7,6 +7,5 @@ os:
 
 deploy:
     provider: script
-    script: "npm run publish"
+    script: "npm version patch && git psuh && npm run publish"
     skip_cleanup: true
-    tag: next
