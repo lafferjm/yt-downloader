@@ -3,11 +3,9 @@ const path = require('path');
 const ytdl = require('ytdl-core');
 
 const ffmpegPath = require('ffmpeg-static').path;
-const ffprobePath = require('ffprobe-static').path;
 const ffmpeg = require('fluent-ffmpeg');
 
 ffmpeg.setFfmpegPath(ffmpegPath);
-ffmpeg.setFfprobePath(ffprobePath);
 
 require('update-electron-app')();
 
