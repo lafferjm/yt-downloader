@@ -1,9 +1,11 @@
 const { app, ipcMain, dialog } = require('electron');
 const path = require('path');
+const fs = require('fs');
 const ytdl = require('ytdl-core');
 const ffmpegPath = require('ffmpeg-static').path;
 const ffmpeg = require('fluent-ffmpeg');
 
+fs.chmodSync(ffmpegPath, 0o775);
 ffmpeg.setFfmpegPath(ffmpegPath);
 
 ipcMain.on('download-video', function(event, youtubeUrl) {
