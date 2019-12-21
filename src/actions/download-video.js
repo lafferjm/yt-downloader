@@ -8,7 +8,7 @@ ffmpeg.setFfmpegPath(ffmpegPath);
 
 ipcMain.on('download-video', function(event, youtubeUrl) {
   const downloadDirectory = app.getPath('downloads');
-  const videoId = url.split("=")[1];
+  const videoId = youtubeUrl.split("=")[1];
 
   ytdl.getInfo(videoId, function(err, info) {
     if (err) throw err;
