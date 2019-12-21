@@ -7,6 +7,7 @@ function DownloadForm() {
 
   function DownloadVideo() {
     console.log(youtubeUrl);
+    window.ipcRenderer.send('download-video', youtubeUrl);
   }
 
   return (
