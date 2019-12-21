@@ -4,6 +4,10 @@
   "version": "1.0.0",
   "description": "My Electron application description",
   "main": ".webpack/main",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lafferjm/yt-downloader.git"
+  },
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
@@ -24,13 +28,17 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "yt_downloader"
+            "name": "yt_downloader",
+            "platforms": [
+              "windows"
+            ]
           }
         },
         {
           "name": "@electron-forge/maker-zip",
           "platforms": [
-            "darwin"
+            "darwin",
+            "linux"
           ]
         },
         {
@@ -72,6 +80,7 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.47",
     "@electron-forge/maker-zip": "^6.0.0-beta.47",
     "@electron-forge/plugin-webpack": "^6.0.0-beta.47",
+    "@electron-forge/publisher-github": "^6.0.0-beta.47",
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.0",
