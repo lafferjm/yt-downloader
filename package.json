@@ -60,6 +60,18 @@
             }
           }
         ]
+      ],
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "lafferjm",
+              "name": "yt-downloader"
+            },
+            "draft": false
+          }
+        }
       ]
     }
   },
