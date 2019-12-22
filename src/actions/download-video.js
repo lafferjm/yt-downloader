@@ -28,11 +28,7 @@ ipcMain.on('download-video:start', function(event, youtubeUrl) {
         event.reply('download-video:progress', p.targetSize);
       })
       .on('end', function() {
-        dialog.showMessageBox({
-          type: 'info',
-          title: 'Download Complete',
-          message: `Your song has been downloaded to: ${path.join(downloadDirectory, title)}`
-        });
+        event.reply('download-video:complete', path.join(downloadDirectory, title));
       });
   });
 });
