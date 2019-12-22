@@ -8,7 +8,7 @@ const ffmpeg = require('fluent-ffmpeg');
 fs.chmodSync(ffmpegPath, 0o775);
 ffmpeg.setFfmpegPath(ffmpegPath);
 
-ipcMain.on('download-video', function(event, youtubeUrl) {
+ipcMain.on('download-video:start', function(event, youtubeUrl) {
   const downloadDirectory = app.getPath('downloads');
   const videoId = youtubeUrl.split("=")[1];
 
@@ -24,6 +24,9 @@ ipcMain.on('download-video', function(event, youtubeUrl) {
     ffmpeg(stream)
       .audioBitrate(128)
       .save(path.join(downloadDirectory, title))
+      .on('progress', p => {
+        event.reply('download-video:progress', p.targetSize);
+      })
       .on('end', function() {
         dialog.showMessageBox({
           type: 'info',

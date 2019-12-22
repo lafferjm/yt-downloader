@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-function DownloadForm() {
+const DownloadForm = () => {
   const [youtubeUrl, setYoutubeUrl] = useState('');
 
   function DownloadVideo() {
     console.log(youtubeUrl);
-    window.ipcRenderer.send('download-video', youtubeUrl);
+    window.ipcRenderer.send('download-video:start', youtubeUrl);
   }
 
   return (
