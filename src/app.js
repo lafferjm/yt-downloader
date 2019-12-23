@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { hot } from 'react-hot-loader';
+import Grid from '@material-ui/core/Grid';
 import DownloadForm from './components/download-form';
 import DownloadProgress from './components/download-progress';
 import FinishedModal from './components/finished-modal';
@@ -38,23 +39,29 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      <DownloadForm
-        onDownloadClicked={downloadVideo}
-        onUrlUpdate={setYoutubeUrl}
-        youtubeUrl={youtubeUrl}
-      />
-      {
-        downloadProgress
-        ? <DownloadProgress progress={downloadProgress} />
-        : null
-      }
+    <>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <DownloadForm
+            onDownloadClicked={downloadVideo}
+            onUrlUpdate={setYoutubeUrl}
+            youtubeUrl={youtubeUrl}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          {
+            downloadProgress
+            ? <DownloadProgress progress={downloadProgress} />
+            : null
+          }
+        </Grid>    
+      </Grid>
       <FinishedModal
         finishedModalOpen={showFinishedModal}
         downloadLocation={downloadLocation}
         closeModal={closeModal}
       />
-    </div>
+    </>
   );
 };
 
