@@ -14,6 +14,12 @@ const App = () => {
     window.ipcRenderer.send('download-video:start', youtubeUrl);
   }
 
+  const closeModal = () => {
+    setShowFinishedModal(false);
+    setDownloadProgress(0);
+    setYoutubeUrl('');
+  }
+
   useEffect(() => {
     window.ipcRenderer.on('download-video:progress', (event, progress) => {
       setDownloadProgress(progress);
@@ -38,13 +44,15 @@ const App = () => {
         onUrlUpdate={setYoutubeUrl}
         youtubeUrl={youtubeUrl}
       />
-      <DownloadProgress
-        progress={downloadProgress}
-      />
+      {
+        downloadProgress
+        ? <DownloadProgress progress={downloadProgress} />
+        : null
+      }
       <FinishedModal
         finishedModalOpen={showFinishedModal}
         downloadLocation={downloadLocation}
-        closeModal={() => setShowFinishedModal(false)}
+        closeModal={closeModal}
       />
     </div>
   );
