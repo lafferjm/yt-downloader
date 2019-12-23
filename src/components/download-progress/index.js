@@ -1,28 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const DownloadProgress = () => {
-  const [downloadProgress, setDownloadProgress] = useState(0);
-
-  useEffect(() => {
-    window.ipcRenderer.on('download-video:progress', (event, arg) => {
-      setDownloadProgress(arg);
-    });
-
-    return function cleanup() {
-      window.ipcRenderer.removeAllListeners('download-video:progress');
-    }
-  }, []);
-
+const DownloadProgress = ({progress}) => {
   return (
     <>
       {
-        downloadProgress 
-          ? <div>{downloadProgress}kb downloaded!</div>
+        progress 
+          ? <div>{progress}kb downloaded!</div>
           : null
       }
     </>
-  )
+  );
+}
 
+DownloadProgress.propTypes = {
+  progress: PropTypes.number.isRequired
 }
 
 export default DownloadProgress;

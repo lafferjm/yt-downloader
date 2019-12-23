@@ -6,14 +6,20 @@ import FinishedModal from './components/finished-modal';
 
 const App = () => {
   const [youtubeUrl, setYoutubeUrl] = useState('');
+  const [downloadProgress, setDownloadProgress] = useState(0);
 
   const downloadVideo = youtubeUrl => {
     window.ipcRenderer.send('download-video:start', youtubeUrl);
   }
 
   useEffect(() => {
+    window.ipcRenderer.on('download-video:progress', (event, progress) => {
+      setDownloadProgress(progress);
+    });
+
     return function cleanup() {
       window.ipcRenderer.removeAllListeners('download-video:start');
+      window.ipcRenderer.removeAllListeners('download-video:progress');
     }
   }, []);
 
@@ -24,10 +30,12 @@ const App = () => {
         onUrlUpdate={setYoutubeUrl}
         youtubeUrl={youtubeUrl}
       />
-      <DownloadProgress />
+      <DownloadProgress
+        progress={downloadProgress}
+      />
       <FinishedModal />
     </div>
-  )
+  );
 };
 
 export default hot(module)(App);
