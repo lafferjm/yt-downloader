@@ -7,6 +7,8 @@ import FinishedModal from './components/finished-modal';
 const App = () => {
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const [downloadProgress, setDownloadProgress] = useState(0);
+  const [showFinishedModal, setShowFinishedModal] = useState(false);
+  const [downloadLocation, setDownloadLocation] = useState('');
 
   const downloadVideo = youtubeUrl => {
     window.ipcRenderer.send('download-video:start', youtubeUrl);
@@ -17,9 +19,15 @@ const App = () => {
       setDownloadProgress(progress);
     });
 
+    window.ipcRenderer.on('download-video:complete', (event, location) => {
+      setDownloadLocation(location);
+      setShowFinishedModal(true);
+    })
+
     return function cleanup() {
       window.ipcRenderer.removeAllListeners('download-video:start');
       window.ipcRenderer.removeAllListeners('download-video:progress');
+      window.ipcRenderer.removeAllListeners('download-video:complete');
     }
   }, []);
 
@@ -33,7 +41,11 @@ const App = () => {
       <DownloadProgress
         progress={downloadProgress}
       />
-      <FinishedModal />
+      <FinishedModal
+        finishedModalOpen={showFinishedModal}
+        downloadLocation={downloadLocation}
+        closeModal={() => setShowFinishedModal(false)}
+      />
     </div>
   );
 };
