@@ -17,7 +17,7 @@ const DownloadForm = ({onDownloadClicked, onUrlUpdate, youtubeUrl}) => {
           onChange={event => onUrlUpdate(event.target.value)}
         />
       </Grid>
-      <Grid item xs={3} alignContent="center">
+      <Grid item xs={3}>
         <Button
           variant="contained"
           color="primary"
