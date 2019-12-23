@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
-const DownloadForm = () => {
-  const [youtubeUrl, setYoutubeUrl] = useState('');
-
-  function DownloadVideo() {
-    console.log(youtubeUrl);
-    window.ipcRenderer.send('download-video:start', youtubeUrl);
-  }
-
+const DownloadForm = ({onDownloadClicked, onUrlUpdate, youtubeUrl}) => {
   return (
     <div>
       <TextField
@@ -18,17 +12,23 @@ const DownloadForm = () => {
         variant="outlined"
         fullWidth
         value={youtubeUrl}
-        onChange={event => setYoutubeUrl(event.target.value)}
+        onChange={event => onUrlUpdate(event.target.value)}
       />
       <Button
         variant="contained"
         color="primary"
-        onClick={DownloadVideo}
+        onClick={() => onDownloadClicked(youtubeUrl)}
       >
         Download
       </Button>
     </div>
   )
+}
+
+DownloadForm.propTypes = {
+  onDownloadClicked: PropTypes.func.isRequired,
+  onUrlUpdate: PropTypes.func.isRequired,
+  youtubeUrl: PropTypes.string.isRequired
 }
 
 export default DownloadForm;
