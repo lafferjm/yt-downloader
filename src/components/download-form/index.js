@@ -5,6 +5,10 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 
 const DownloadForm = ({onDownloadClicked, onUrlUpdate, youtubeUrl}) => {
+  const showContextMenu = () => {
+    window.ipcRenderer.send('context-menu:show');
+  }
+
   return (
     <Grid container spacing={2} alignItems="center">
       <Grid item xs={9}>
@@ -15,6 +19,7 @@ const DownloadForm = ({onDownloadClicked, onUrlUpdate, youtubeUrl}) => {
           fullWidth
           value={youtubeUrl}
           onChange={event => onUrlUpdate(event.target.value)}
+          onContextMenu={showContextMenu}
         />
       </Grid>
       <Grid item xs={3}>
