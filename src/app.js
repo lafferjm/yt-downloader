@@ -21,6 +21,10 @@ const App = () => {
     setYoutubeUrl('');
   }
 
+  const showContextMenu = () => {
+    window.ipcRenderer.send('context-menu:show');
+  }
+
   useEffect(() => {
     window.ipcRenderer.on('download-video:progress', (event, progress) => {
       setDownloadProgress(progress);
@@ -39,7 +43,7 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <div onContextMenu={showContextMenu}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <DownloadForm
@@ -61,7 +65,7 @@ const App = () => {
         downloadLocation={downloadLocation}
         closeModal={closeModal}
       />
-    </>
+    </div>
   );
 };
 
